@@ -1,0 +1,96 @@
+{
+  "version": "v22",
+  "labels": [
+    "yes",
+    "no",
+    "other"
+  ],
+  "gate_other_th": 0.55,
+  "modes": {
+    "fast": {
+      "towers": {
+        "t1": 0.7,
+        "stu": 0.3
+      },
+      "mult": null
+    },
+    "full": {
+      "towers": {
+        "t1": 0.45,
+        "t2": 0.15,
+        "bert_ep2": 0.1,
+        "bert_ep3": 0.2,
+        "stu": 0.1,
+        "t6": 0.05
+      },
+      "mult": [
+        1.32,
+        1.42,
+        1.2
+      ]
+    }
+  },
+  "bert": {
+    "ep3": "bert/stance3_bert_v21",
+    "ep2": "bert/stance3_bert_distill"
+  },
+  "bert_maxlen": 96,
+  "e5_model": "intfloat/multilingual-e5-small",
+  "e5_scale": 0.5,
+  "metrics": {
+    "note": "macro-F1。完整数值与逐项复现方式见 eval/expected_metrics.json 与 REPRODUCE.md",
+    "fast": {
+      "audit200": 0.6161,
+      "user300": 0.5691,
+      "comb500": 0.5857,
+      "comb500_no_f1": 0.5063
+    },
+    "full": {
+      "audit200": 0.6769,
+      "user300": 0.6072,
+      "comb500": 0.6346,
+      "comb500_no_f1": 0.5269
+    }
+  },
+  "accuracy": {
+    "note": "audit200 为随机抽样，代表真实分布；user300 为对抗抽样，不代表分布",
+    "fast_audit200": 0.695,
+    "fast_user300": 0.6733,
+    "fast_comb500": 0.682,
+    "full_audit200": 0.74,
+    "full_user300": 0.7033,
+    "full_comb500": 0.718,
+    "baseline_all_other_audit200": 0.595
+  },
+  "corpus_distribution": {
+    "note": "对 589678 条 2ch 全语料的预测分布，见 data/corpus_scores_v22.csv",
+    "v22_fast": {
+      "yes": 0.1784,
+      "no": 0.1109,
+      "other": 0.7107
+    },
+    "v21_1": {
+      "other": 0.7107,
+      "yes": 0.1784,
+      "no": 0.1109
+    },
+    "v21_2": {
+      "other": 0.7339,
+      "yes": 0.1651,
+      "no": 0.1011
+    },
+    "reference_20k_full_three_tower": {
+      "other": 0.7006,
+      "yes": 0.1735,
+      "no": 0.1258
+    }
+  },
+  "training_data": {
+    "t1": "推特 1835 条，不含 2ch",
+    "t2": "推特 1835 条，不含 2ch",
+    "stu": "20000 条真实 2ch 帖，标签为三塔集成预测，非人工",
+    "t6": "全池 2721 条，推特行前文为空",
+    "bert_ep3": "全池 2721 条，其中 2ch 886 条",
+    "bert_ep2": "同上，不同轮次检查点"
+  }
+}

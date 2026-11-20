@@ -1,0 +1,187 @@
+{
+  "note": "本包所有对外报出的数字。eval_all.py 会逐项比对，不一致即视为复现失败。",
+  "evaluation_sets": {
+    "audit200": {
+      "file": "data/eval_audit200.csv",
+      "label_column": "label_v3",
+      "rows": 200,
+      "sampling": "从 589,678 条语料随机抽取，代表真实分布",
+      "class_counts": {
+        "yes": 47,
+        "no": 34,
+        "other": 119
+      }
+    },
+    "user300": {
+      "file": "data/eval_user300.csv",
+      "label_column": "user_label",
+      "rows": 300,
+      "sampling": "100% 抽自旧模型 v12 判为 other 的漏判样本，不代表分布",
+      "class_counts": {
+        "yes": 52,
+        "no": 52,
+        "other": 196
+      }
+    },
+    "comb500": {
+      "note": "audit200 与 user300 直接拼接，混合集，不可作为主指标",
+      "rows": 500,
+      "class_counts": {
+        "yes": 99,
+        "no": 86,
+        "other": 315
+      }
+    }
+  },
+  "baseline": {
+    "audit200_all_other_accuracy": 0.595
+  },
+  "fast": {
+    "weights": {
+      "t1": 0.7,
+      "stu": 0.3
+    },
+    "mult": null,
+    "gate_other_th": 0.55,
+    "macro_f1": {
+      "audit200": 0.6161,
+      "user300": 0.5691,
+      "comb500": 0.5857
+    },
+    "accuracy": {
+      "audit200": 0.695,
+      "user300": 0.6733,
+      "comb500": 0.682
+    },
+    "comb500_no_f1": 0.5063
+  },
+  "full": {
+    "weights": {
+      "t1": 0.45,
+      "t2": 0.15,
+      "bert_ep2": 0.1,
+      "bert_ep3": 0.2,
+      "stu": 0.1,
+      "t6": 0.05
+    },
+    "mult": [
+      1.32,
+      1.42,
+      1.2
+    ],
+    "gate_other_th": 0.55,
+    "macro_f1": {
+      "audit200": 0.6769,
+      "user300": 0.6072,
+      "comb500": 0.6346
+    },
+    "accuracy": {
+      "audit200": 0.74,
+      "user300": 0.7033,
+      "comb500": 0.718
+    },
+    "comb500_no_f1": 0.5269,
+    "audit200_per_class_f1": {
+      "yes": 0.5618,
+      "no": 0.6364,
+      "other": 0.8327
+    },
+    "audit200_per_class_recall": {
+      "yes": 0.532,
+      "no": 0.618,
+      "other": 0.857
+    },
+    "audit200_per_class_precision": {
+      "yes": 0.595,
+      "no": 0.656,
+      "other": 0.81
+    }
+  },
+  "bert_degradation": {
+    "note": "不同 BERT 权重状态下的 full 口径成绩，用于判断环境是否装全",
+    "both_ep2_ep3": {
+      "audit200": 0.6769,
+      "user300": 0.6072,
+      "comb500": 0.6346
+    },
+    "only_ep3": {
+      "audit200": 0.6511,
+      "user300": 0.6006,
+      "comb500": 0.619
+    },
+    "only_ep2": {
+      "audit200": 0.6124,
+      "user300": 0.6024,
+      "comb500": 0.6042
+    },
+    "no_bert": {
+      "audit200": 0.5858,
+      "user300": 0.5703,
+      "comb500": 0.5748
+    }
+  },
+  "corpus": {
+    "file": "data/corpus_scores_v22.csv",
+    "rows": 589678,
+    "columns": [
+      "pid",
+      "text",
+      "pred",
+      "p_yes",
+      "p_no",
+      "p_other",
+      "margin",
+      "source_tier",
+      "divergent_zone",
+      "pred_v21_1",
+      "pred_v21_2"
+    ],
+    "distribution_v22": {
+      "yes": 0.1784,
+      "no": 0.1109,
+      "other": 0.7107
+    },
+    "distribution_v21_1": {
+      "other": 0.7107,
+      "yes": 0.1784,
+      "no": 0.1109
+    },
+    "distribution_v21_2": {
+      "other": 0.7339,
+      "yes": 0.1651,
+      "no": 0.1011
+    },
+    "reference_20k_full_three_tower": {
+      "other": 0.7006,
+      "yes": 0.1735,
+      "no": 0.1258
+    }
+  },
+  "selftest": {
+    "note": "12 条人工确认样本，其中 5 条 easy、10 条 hard。hard 取自分歧区，用于回归检测而非性能评估。",
+    "fast_hit": "10/15",
+    "fast_easy": "5/5",
+    "fast_hard": "5/10",
+    "full_both_bert": {
+      "hit": "12/15",
+      "easy": "5/5",
+      "hard": "7/10"
+    },
+    "full_only_ep3": {
+      "hit": "11/15",
+      "easy": "5/5",
+      "hard": "6/10"
+    }
+  },
+  "funnel": {
+    "note": "audit200 分歧区 54 条带前文盲判后覆盖的结果，由 eval/eval_funnel_audit200.py 复现",
+    "divergent_n": 54,
+    "auto_macro_f1": 0.6769,
+    "funnel_macro_f1": 0.6934,
+    "auto_accuracy": 0.74,
+    "funnel_accuracy": 0.755,
+    "blind_agreement_with_label_v3": 0.6296,
+    "divergent_auto_accuracy": 0.5741
+  },
+  "tolerance": 0.0005
+}

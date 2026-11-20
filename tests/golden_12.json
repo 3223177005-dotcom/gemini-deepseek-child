@@ -1,0 +1,20 @@
+{
+  "note": "人工确认样本，含 easy 与 hard 两档。hard 取自模型与词法塔分歧区，用于回归检测而非性能评估。",
+  "items": [
+    {"text": "改憲賛成。9条に自衛隊を明記すべきだ。", "label": "yes", "tier": "easy"},
+    {"text": "憲法9条を守れ。改憲反対。", "label": "no", "tier": "easy"},
+    {"text": "おはようございます", "label": "other", "tier": "easy"},
+    {"text": "今日はいい天気ですね", "label": "other", "tier": "easy"},
+    {"text": "自衛隊を国防軍として憲法に明記する案に賛成です", "label": "yes", "tier": "easy"},
+    {"text": "まるで植民地のような憲法だったから改正は当然。", "label": "yes", "tier": "hard"},
+    {"text": "軍国主義国家に逆戻りさせるつもりかい？ 自民党と維新には憲法を触らせたらダメだわ", "label": "no", "tier": "hard"},
+    {"text": "９条のおかげで 他国が攻めてこないんだ 改憲バカは", "label": "no", "tier": "hard"},
+    {"text": "9条批判派はまず、大日本帝国というキチガイ好戦国家があったという事実を受け止めなきゃね", "label": "no", "tier": "hard"},
+    {"text": "9条の精神は1項部分にあって2項はただの手段明記なんだから2項消してもええやろ", "label": "yes", "tier": "hard"},
+    {"text": "汚職は死刑って憲法に追加するなら国民全員賛成よ", "label": "other", "tier": "hard"},
+    {"text": "改憲は立法府の仕事 内閣は行政府なんだから口を出すなよ 越権行為だぞ", "label": "other", "tier": "hard"},
+    {"text": "バカでクズでのろまなネトウヨに ９条の鉄壁の防御を崩せるわけがないんだよ", "label": "no", "tier": "hard"},
+    {"text": "高市の支持率は見えないフリか？w", "label": "other", "tier": "hard"},
+    {"text": "早く台湾有事やれよ", "label": "other", "tier": "hard"}
+  ]
+}
